@@ -21,14 +21,19 @@
                 <li class="list-group-item">
                     <a href="{{url('/comments/delete/'.$comments->id)}}" class="btn-close float-end"></a>
                     {{$comments->content}}
+                    <div class="small mt-2">
+                        By <b>{{$comments->user->name}}</b>
+                    </div>
                 </li>
             @endforeach
         </ul>
-        <form class="my-2" action="{{ url('/comments/add') }}" method="post">
-            @csrf
-            <input type="hidden" name="article_id" value="{{ $article->id }}">
-            <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
-            <input type="submit" value="Add Comment" class="btn btn-secondary">
-        </form>
+        @auth
+            <form class="my-2" action="{{ url('/comments/add') }}" method="post">
+                @csrf
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
+                <input type="submit" value="Add Comment" class="btn btn-secondary">
+            </form>
+        @endauth
     </div>
 @endsection
