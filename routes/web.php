@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/articles');
 });
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
